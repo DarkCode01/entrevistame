@@ -5,15 +5,6 @@ const PageBase = styled.div`
   height: 100vh;
   background-color: var(--dark2-blue-color);
   color: var(--light-color);
-
-  main {
-    padding: 1rem;
-    /* flex: 1; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: cen/ter; */
-    /* align-items: center; */
-  }
 `;
 
 interface IPage {

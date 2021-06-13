@@ -1,9 +1,13 @@
 import Page from "../components/Page";
+import Nav from "../components/Nav";
+import Container from "../components/Container";
 
 export const Home = (): JSX.Element => {
   return (
     <Page>
-      <div>sadsad</div>
+      <Container>
+        <Nav />
+      </Container>
     </Page>
   );
 };

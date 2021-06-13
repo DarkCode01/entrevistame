@@ -8,6 +8,7 @@ const globalStyles = createGlobalStyle`
 
     --dark-blue-color: rgb(31, 41, 55);
     --dark2-blue-color: rgb(28, 37, 49);
+    --dark-black-color: rgb(15, 17, 23);
   }
 
   html,
