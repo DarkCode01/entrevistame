@@ -5,6 +5,8 @@ const PageBase = styled.div`
   height: 100vh;
   background-color: var(--dark2-blue-color);
   color: var(--light-color);
+  overflow-x: hidden;
+  overflow-y: hidden;
 `;
 
 interface IPage {

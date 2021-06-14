@@ -32,8 +32,8 @@ export default function Nav(): JSX.Element {
       </NavItem>
       <NavItem>
         <GroupButton>
-          <NavButton>Entrar Sala</NavButton>
-          <NavButton>Crear Sala</NavButton>
+          <NavButton>Entrar</NavButton>
+          <NavButton>Crear</NavButton>
         </GroupButton>
       </NavItem>
     </Base>

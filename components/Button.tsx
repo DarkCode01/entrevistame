@@ -13,6 +13,8 @@ const Button = styled.button`
   background-color: rgb(50, 63, 74);
   color: var(--secondary-color);
   font-size: 1rem;
+  width: 100%;
+  text-transform: uppercase;
 `;
 
 export { Button, GroupButton };
