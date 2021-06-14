@@ -1,9 +1,15 @@
 import { useRef } from "react";
+import { useRecoilValue } from "recoil";
+import { settings, currentFile, language, themeEditor } from "../../store";
 import Monaco from "monaco-editor";
 import EditorBase from "@monaco-editor/react";
 
 export default function Editor(): JSX.Element {
   const monacoRef = useRef(null);
+  const options = useRecoilValue(settings);
+  const currentPath = useRecoilValue(currentFile);
+  const currentLanguage = useRecoilValue(language);
+  const currentTheme = useRecoilValue(themeEditor);
 
   const handleEditorWillMount = (monaco: any) => {
     monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
@@ -32,29 +38,15 @@ export default function Editor(): JSX.Element {
   return (
     <EditorBase
       height="92vh"
-      defaultLanguage="elixir"
-      defaultValue={`# Welcome man xD\n#klk`}
-      theme="vs-dark"
-      options={{
-        minimap: {
-          enabled: false,
-        },
-        fontSize: 16,
-        contextmenu: false,
-        wordWrap: "bounded",
-        scrollbar: {
-          vertical: "auto",
-          handleMouseWheel: true,
-        },
-        scrollBeyondLastLine: false,
-        wordWrapColumn: 110,
-        lineHeight: 30,
-        links: true,
-      }}
+      defaultLanguage={currentLanguage}
+      defaultValue={currentPath.value}
+      theme={currentTheme}
+      options={options}
       beforeMount={handleEditorWillMount}
       onMount={handleEditorDidMount}
       onChange={handleEditorOnChange}
       loading={<>Cargandodoodod</>}
+      path={currentPath.path}
     />
   );
 }

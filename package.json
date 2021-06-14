@@ -28,12 +28,15 @@
   "dependencies": {
     "@iconscout/react-unicons": "^1.1.6",
     "@monaco-editor/react": "^4.2.0",
+    "add": "^2.0.6",
     "monaco-editor": "^0.25.0",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-jutsu": "^3.0.2",
-    "styled-components": "^5.3.0"
+    "recoil": "^0.3.1",
+    "styled-components": "^5.3.0",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.5",
