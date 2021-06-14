@@ -13,7 +13,11 @@ interface IPage {
   children: JSX.Element;
 }
 
-export default function Page({ title, description, children }: IPage): JSX.Element {
+export default function Page({
+  title,
+  description,
+  children,
+}: IPage): JSX.Element {
   return (
     <PageBase>
       <Head>
@@ -23,6 +27,7 @@ export default function Page({ title, description, children }: IPage): JSX.Eleme
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content={title} />
         <meta property="og:description" content={description} />
+        <script src="https://meet.jit.si/external_api.js"></script>
       </Head>
 
       <main>{children}</main>
@@ -32,5 +37,5 @@ export default function Page({ title, description, children }: IPage): JSX.Eleme
 
 Page.defaultProps = {
   title: "Simple cferer",
-  description: "Solo por aburrido :D"
+  description: "Solo por aburrido :D",
 };
