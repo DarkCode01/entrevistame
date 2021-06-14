@@ -4,6 +4,7 @@ import Container from "../components/Container";
 // import Footer from "../components/Footer";
 import Editor from "../components/Editor";
 import Camera from "../components/Camera";
+import Menu from "../components/Menu";
 // import styles from "../styles/simple.module.css";
 
 export const Home = (): JSX.Element => {
@@ -24,6 +25,10 @@ export const Home = (): JSX.Element => {
             }}
           >
             <Editor />
+          </Container>
+
+          <Container>
+            <Menu />
           </Container>
         </Container>
 

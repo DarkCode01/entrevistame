@@ -26,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "@iconscout/react-unicons": "^1.1.6",
     "@monaco-editor/react": "^4.2.0",
     "monaco-editor": "^0.25.0",
     "next": "latest",

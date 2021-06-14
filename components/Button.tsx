@@ -10,7 +10,7 @@ const Button = styled.button`
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(50, 63, 74);
+  background-color: ${(props) => props.color || "rgb(50, 63, 74)"};
   color: var(--secondary-color);
   font-size: 1rem;
   width: 100%;
