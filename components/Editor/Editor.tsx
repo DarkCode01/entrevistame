@@ -1,10 +1,19 @@
 import { useRef } from "react";
 import { useRecoilValue } from "recoil";
-import { settings, currentFile, language, themeEditor } from "../../store";
+import {
+  settings,
+  currentFile,
+  language,
+  themeEditor,
+} from "../../lib/store/editor";
 import Monaco from "monaco-editor";
 import EditorBase from "@monaco-editor/react";
 
-export default function Editor(): JSX.Element {
+interface IEditor {
+  room: string;
+}
+
+export default function Editor({ room }: IEditor): JSX.Element {
   const monacoRef = useRef(null);
   const options = useRecoilValue(settings);
   const currentPath = useRecoilValue(currentFile);
@@ -39,13 +48,13 @@ export default function Editor(): JSX.Element {
     <EditorBase
       height="92vh"
       defaultLanguage={currentLanguage}
-      defaultValue={currentPath.value}
+      defaultValue={currentPath.value.replace("{room}", `#${room}`)}
       theme={currentTheme}
       options={options}
       beforeMount={handleEditorWillMount}
       onMount={handleEditorDidMount}
       onChange={handleEditorOnChange}
-      loading={<>Cargandodoodod</>}
+      loading={<>Cargando</>}
       path={currentPath.path}
     />
   );

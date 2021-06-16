@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const PageBase = styled.div`
   height: 100vh;
-  background-color: var(--dark2-blue-color);
+  background-color: var(--dark-black-color);
   color: var(--light-color);
   overflow-x: hidden;
   overflow-y: hidden;

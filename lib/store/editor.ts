@@ -7,7 +7,7 @@ export const currentFile = atom({
     path: "main.ex",
     value: `defmodule Entrevistame do
   @docmodule """
-    Room: #dadsada
+    Room: {room}
     users: (2)
   """
 

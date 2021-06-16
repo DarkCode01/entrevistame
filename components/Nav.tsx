@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button, GroupButton } from "./Button";
 
 const Base = styled.header`
   border: 1px solid black;
@@ -8,6 +7,10 @@ const Base = styled.header`
   justify-content: space-between;
   align-items: center;
   background-color: var(--dark-black-color);
+
+  button {
+    background-color: rgb(25, 27, 33);
+  }
 `;
 
 const NavItem = styled.div``;
@@ -20,22 +23,23 @@ const NavRoom = styled.code`
   color: gray;
 `;
 
-const NavButton = styled(Button)`
-  background-color: rgb(25, 27, 33);
-`;
+interface INav {
+  room?: string;
+  buttons?: JSX.Element;
+}
 
-export default function Nav(): JSX.Element {
+export default function Nav({ buttons, room }: INav): JSX.Element {
   return (
     <Base>
       <NavItem>
-        <NavTitle>Entrevis</NavTitle> / <NavRoom>sdas</NavRoom>
+        <NavTitle>Entrevistame</NavTitle>{" "}
+        {room && (
+          <>
+            / <NavRoom>#{room}</NavRoom>
+          </>
+        )}
       </NavItem>
-      <NavItem>
-        <GroupButton>
-          <NavButton>Entrar</NavButton>
-          <NavButton>Crear</NavButton>
-        </GroupButton>
-      </NavItem>
+      <NavItem>{buttons}</NavItem>
     </Base>
   );
 }
