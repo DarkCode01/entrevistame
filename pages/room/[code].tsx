@@ -26,8 +26,8 @@ const Home = ({ code }: IHome): JSX.Element => {
         room: roomId,
       },
     });
-    const channel = socket.channel("live_code:room", {
-      room: roomId,
+    const channel = socket.channel(`live_code:${code}`, {
+      room: code,
     });
 
     setCurrentChannel(channel);
