@@ -1,17 +1,49 @@
+import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
+import { v4 as uuid } from "uuid";
 import Page from "../../components/Page";
 import Nav from "../../components/Nav";
 import Container from "../../components/Container";
 import Editor from "../../components/Editor";
-import Camera from "../../components/Camera";
+// import Camera from "../../components/Camera";
 import Menu from "../../components/Menu";
 import { Button, GroupButton } from "../../components/Button";
+// import { useChannel } from "../../lib/hooks/useChannel";
+import { Socket } from "phoenix";
 
 interface IHome {
   code: string;
 }
 
 const Home = ({ code }: IHome): JSX.Element => {
+  const roomId = uuid();
+  const userId = uuid();
+  const [currentChannel, setCurrentChannel] = useState(null);
+
+  useEffect(() => {
+    const socket = new Socket("ws://localhost:4000/socket", {
+      params: {
+        room: roomId,
+      },
+    });
+    const channel = socket.channel("live_code:room", {
+      room: roomId,
+    });
+
+    setCurrentChannel(channel);
+
+    channel.join().receive("ok", () => {
+      // eslint-disable-next-line no-console
+      console.log("connected");
+    });
+
+    socket.connect();
+
+    return () => {
+      channel.leave();
+    };
+  }, []);
+
   return (
     <Page>
       <Container>
@@ -25,9 +57,9 @@ const Home = ({ code }: IHome): JSX.Element => {
         />
 
         <Container style={{ position: "relative" }}>
-          <Container>
+          {/* <Container>
             <Camera />
-          </Container>
+          </Container> */}
 
           <Container
             style={{
@@ -35,7 +67,7 @@ const Home = ({ code }: IHome): JSX.Element => {
               width: "100%",
             }}
           >
-            <Editor room={code} />
+            <Editor userId={userId} room={code} channel={currentChannel} />
           </Container>
 
           <Container>

@@ -1,22 +1,6 @@
 import { atom } from "recoil";
 import { editor } from "monaco-editor";
 
-export const currentFile = atom({
-  key: "currentFile",
-  default: {
-    path: "main.ex",
-    value: `defmodule Entrevistame do
-  @docmodule """
-    Room: {room}
-    users: (2)
-  """
-
-  def print(user), do: IO.puts "Bienvenido #{user}"
-end
-`,
-  },
-});
-
 export const language = atom<string>({
   key: "language",
   default: "elixir",
