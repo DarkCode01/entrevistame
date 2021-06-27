@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const PageBase = styled.div`
   height: 100vh;
-  background-color: var(--dark2-blue-color);
+  background-color: var(--dark-black-color);
   color: var(--light-color);
   overflow-x: hidden;
   overflow-y: hidden;
@@ -29,7 +29,7 @@ export default function Page({
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content={title} />
         <meta property="og:description" content={description} />
-        <script src="https://meet.jit.si/external_api.js"></script>
+        {/* <script src="https://meet.jit.si/external_api.js"></script> */}
       </Head>
 
       <main>{children}</main>

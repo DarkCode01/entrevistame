@@ -1,15 +1,35 @@
-import { useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { settings, currentFile, language, themeEditor } from "../../store";
+import { v4 as uuid } from "uuid";
+import { settings, language, themeEditor } from "../../lib/store/editor";
 import Monaco from "monaco-editor";
 import EditorBase from "@monaco-editor/react";
 
-export default function Editor(): JSX.Element {
+interface IEditor {
+  room: string;
+  channel: any;
+  userId: string;
+}
+
+export default function Editor({
+  userId,
+  room,
+  channel,
+}: IEditor): JSX.Element {
   const monacoRef = useRef(null);
   const options = useRecoilValue(settings);
-  const currentPath = useRecoilValue(currentFile);
   const currentLanguage = useRecoilValue(language);
   const currentTheme = useRecoilValue(themeEditor);
+  const [pathId, setPathId] = useState(uuid());
+  const [content, setContent] = useState(`defmodule Entrevistame do
+  @docmodule """
+    Room: #${room}
+    users: (2)
+  """
+
+  def print(user), do: IO.puts "Bienvenido #{user}"
+end
+`);
 
   const handleEditorWillMount = (monaco: any) => {
     monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
@@ -20,33 +40,42 @@ export default function Editor(): JSX.Element {
     _monaco: any
   ) => {
     monacoRef.current = editor;
-    // monacoRef.current.deltaDecorations([], [
-    //   { range: new monaco.Range(, 8, 8, 8), options: { className: styles.mycursor } },
-    // ]);
   };
 
   const handleEditorOnChange = (
     value: string | undefined,
-    event: Monaco.editor.IModelContentChangedEvent
+    _event: Monaco.editor.IModelContentChangedEvent
   ) => {
-    // eslint-disable-next-line no-console
-    console.log(value);
-    // eslint-disable-next-line no-console
-    console.log(event);
+    channel.push("shout", { sender: userId, value });
   };
+
+  useEffect(() => {
+    if (channel && monacoRef) {
+      channel.on("shout", ({ sender, value }) => {
+        if (sender !== userId) {
+          setContent(value);
+          setPathId(uuid());
+        }
+      });
+    }
+
+    return () => {
+      channel && monacoRef && channel.leave();
+    };
+  }, [channel, monacoRef]);
 
   return (
     <EditorBase
       height="92vh"
       defaultLanguage={currentLanguage}
-      defaultValue={currentPath.value}
+      path={pathId}
+      defaultValue={content}
       theme={currentTheme}
       options={options}
       beforeMount={handleEditorWillMount}
       onMount={handleEditorDidMount}
       onChange={handleEditorOnChange}
-      loading={<>Cargandodoodod</>}
-      path={currentPath.path}
+      loading={<>Cargando</>}
     />
   );
 }
